@@ -51,7 +51,7 @@ bot('sendmessage',[
     'text'=>$balinfo,
     ]);
 }
-if($tx and ($cty == "private")) {
+if($tx and $cty == "private") {
 bot('sendmessage',[
     'chat_id'=>$cid,
     'text'=>"💡 Bot Yaratishni Hohlaysizmi?
