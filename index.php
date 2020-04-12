@@ -45,18 +45,10 @@ $ismi2 = $update->message->from->last_name;
 
 $balinfo = "Diqqat! Endi Ushbu Guruhda Habar Yozish Uchun $kanalimz kanaliga a'zo bo'lish shart!";
 
-if((mb_stripos($tx,"/start")!==false) or ($tx == "/start")) {
+if($tx == "/start") {
 bot('sendmessage',[
     'chat_id'=>$cid,
     'text'=>$balinfo,
-    ]);
-}
-if($tx and $cty == "private") {
-bot('sendmessage',[
-    'chat_id'=>$cid,
-    'text'=>"💡 Bot Yaratishni Hohlaysizmi?
-🤖 @rustam_hikmatullayev   @lider_koder ga murojat eting,
-📡 Kanalimiz: @php_master_class",
     ]);
 }
 
