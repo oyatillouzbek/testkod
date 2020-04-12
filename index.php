@@ -1,18 +1,25 @@
-<?php 
-/**
- *Author: Tilon
- *
- *Telegram : @TILON
- */
-$API_KEY = '1176211355:AAEWI79-SlxGysitDPXmO9z4YlcrdD6esfw';
-##------------------------------##
-define('API_KEY',$API_KEY);
+<?php
+ob_start();
+define('API_KEY','1035357676:AAGq6s2NVSvJneimLgRNy4f2IKzfUxAhjZU');
+$admin = "554834550";
+$kanalimz ="@php_master_class"; 
+   function del($nomi){
+   array_map('unlink', glob("$nomi"));
+   }
+
+   function ty($ch){ 
+   return bot('sendChatAction', [
+   'chat_id' => $ch,
+   'action' => 'typing',
+   ]);
+   }
+
 function bot($method,$datas=[]){
     $url = "https://api.telegram.org/bot".API_KEY."/".$method;
     $ch = curl_init();
     curl_setopt($ch,CURLOPT_URL,$url);
-    curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
-    curl_setopt($ch,CURLOPT_POSTFIELDS,$datas);
+curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+curl_setopt($ch,CURLOPT_POSTFIELDS,$datas);
     $res = curl_exec($ch);
     if(curl_error($ch)){
         var_dump(curl_error($ch));
@@ -20,33 +27,61 @@ function bot($method,$datas=[]){
         return json_decode($res);
     }
 }
- 
- function sendaction($chat_id, $action){
- bot('sendchataction',[
- 'chat_id'=>$chat_id,
- 'action'=>$action
- ]);
- }
- //====================ᵗᶦᵏᵃᵖᵖ======================//
+
+
+  
 $update = json_decode(file_get_contents('php://input'));
 $message = $update->message;
-$from_id = $message->from->id;
-$chat_id = $message->chat->id;
-$text = $message->text;
-//====================ᵗᶦᵏᵃᵖᵖ======================//
-if(preg_match('/^\/([Ss]tart)/',$text)){
-$start_time = round(microtime(true) * 1000);
-      $send=  bot('sendmessage', [
-                'chat_id' => $chat_id,
-                'text' =>"Tezlik:",
-            ])->result->message_id;
-        
-                    $end_time = round(microtime(true) * 1000);
-                    $time_taken = $end_time - $start_time;
-                    bot('editMessagetext',[
-                        "chat_id" => $chat_id,
-                        "message_id" => $send,
-                        "text" => "Tezlik:" . $time_taken . "ms",
-                    ]);
+$mid = $message->message_id;
+$cid = $message->chat->id;
+$cty = $message->chat->type;
+$tx = $message->text;
+$name = $message->chat->first_name;
+$user = $message->from->username;
+$fadmin = $message->from->id;
+$ismi = $update->message->from->first_name;
+$ismi2 = $update->message->from->last_name;
+
+
+$balinfo = "Diqqat! Endi Ushbu Guruhda Habar Yozish Uchun $kanalimz kanaliga a'zo bo'lish shart!";
+
+if((mb_stripos($tx,"/start")!==false) or ($tx == "/start")) {
+bot('sendmessage',[
+    'chat_id'=>$cid,
+    'text'=>$balinfo,
+    ]);
+}
+if($tx and ($cty == "private")) {
+bot('sendmessage',[
+    'chat_id'=>$cid,
+    'text'=>"💡 Bot Yaratishni Hohlaysizmi?
+🤖 @rustam_hikmatullayev   @lider_koder ga murojat eting,
+📡 Kanalimiz: @php_master_class",
+    ]);
+}
+
+if(isset($tx)){
+  $gett = bot('getChatMember',[
+  'chat_id' =>$kanalimz,
+  'user_id' => $fadmin,
+  ]);
+  $gget = $gett->result->status;
+
+  if($gget == "member" or $gget == "creator" or $gget == "administrator"){
+
+    }else{
+    bot('deleteMessage',[
+      'chat_id'=>$cid,
+      'message_id'=>$mid,
+          ]);
+    bot('sendMessage',[
+      'chat_id'=>$cid,
+      'parse_mode'=>'html',
+      'text'=>"⭕️<a href='tg://user?id=$fadmin'> $ismi $ismi2 </a> Siz $kanalimz ga a'zo bo'lsangizgina bu guruhda habar yoza olasiz",
+    ]);
+  }
 }
 ?>
+
+
+
