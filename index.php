@@ -2,7 +2,7 @@
 ob_start();
 define('API_KEY','1035357676:AAGq6s2NVSvJneimLgRNy4f2IKzfUxAhjZU');
 $admin = "554834550";
-$kanalimz ="@php_master_class"; 
+$kanalimz ="@uzapks"; 
    function del($nomi){
    array_map('unlink', glob("$nomi"));
    }
