@@ -2,9 +2,9 @@
 
 ini_set('date.timezone','ASIA/Tashkent');
 
-$bot_token= 'ooooooooooooooooooooooooooooo';
-$admin_token= 'oooooooooo';
+$bot_token= '959057540:AAGnPVt-gN728vOCpEEQn6__VqeDXQgohFA';
+$admin_token= 'ooooooooo';
 
 $admin = '368844346';
 
-echo "//$bot_token";
+echo "$bot_token";
