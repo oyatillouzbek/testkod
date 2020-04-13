@@ -64,9 +64,9 @@ $user_id = $efede3['message']['from']['id'];
         
         $font = "arial.ttf"; 
         imagettftext($img, 100, 0, 328, 616, $white, $font, $txt);
-        imagejpeg($img, "temp/$chat_id.jpg", 80);
+        imagejpeg($img, "$chat_id.jpg", 80);
 
-        $img = curl_file_create("temp/$chat_id.jpg",'image/jpeg'); 
+        $img = curl_file_create("$chat_id.jpg",'image/jpeg'); 
         $content = array('chat_id' => $chat_id, 'photo' => $img );
         $telegram->sendPhoto($content);
     }
